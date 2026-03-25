@@ -1,0 +1,48 @@
+baseURL = "https://iczsc.com/"
+canonifyURLs = true
+languageCode = "zh-cn"
+title = "ICZSC · 缠论工程实验室"
+theme = "PaperMod"
+publishDir = "docs"
+
+[params]
+  defaultTheme = "light"
+  ShowBreadCrumbs = true
+
+[menu]
+
+  [[menu.main]]
+    identifier = "home"
+    name = "首页"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "read"
+    name = "共读原文"
+    url = "/read/"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "theorems"
+    name = "定理汇总"
+    url = "/theorems/"
+    weight = 3
+
+  [[menu.main]]
+    identifier = "engine"
+    name = "严格笔引擎"
+    url = "/engine/"
+    weight = 4
+
+  [[menu.main]]
+    identifier = "notes"
+    name = "杂记"
+    url = "/notes/"
+    weight = 5
+
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/about/"
+    weight = 6

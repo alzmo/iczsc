@@ -1,0 +1,36 @@
+{{ define "main" }}
+<main class="main">
+
+  <div class="post-list">
+    {{ range .Pages }}
+      {{ $parts := split .Title "｜" }}
+      <article class="post-entry">
+        <a href="{{ .RelPermalink }}">
+          <div class="post-line">
+            <span class="post-index">
+              {{ if ge (len $parts) 2 }}
+                {{ index $parts 0 }}
+              {{ else }}
+                —
+              {{ end }}
+            </span>
+
+            <span class="post-title">
+              {{ if ge (len $parts) 2 }}
+                {{ index $parts 1 }}
+              {{ else }}
+                {{ .Title }}
+              {{ end }}
+            </span>
+
+            <span class="post-date">
+              {{ .Date.Format "2006-01-02" }}
+            </span>
+          </div>
+        </a>
+      </article>
+    {{ end }}
+  </div>
+
+</main>
+{{ end }}

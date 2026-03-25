@@ -1,0 +1,43 @@
+{{ define "main" }}
+<main class="main">
+
+  <!-- 左侧最新文章（浮动，不占中间布局） -->
+  <aside style="position: fixed; left: 40px; top: 180px; width: 240px;">
+    <h2 style="margin-top: 0;">最新文章</h2>
+    <ul style="padding-left: 18px; margin: 0;">
+      {{ range first 5 (where .Site.RegularPages.ByDate.Reverse "Section" "in" (slice "read" "theorems" "engine" "notes")) }}
+      <li style="margin-bottom: 14px;">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a><br>
+        <small>{{ .Date.Format "2006-01-02" }}</small>
+      </li>
+      {{ end }}
+    </ul>
+  </aside>
+
+  <!-- 中间主内容：恢复原来居中的四张卡片 -->
+  <div class="iczsc-cards">
+
+    <a href="/read/" class="card">
+      <h3>共读原文</h3>
+      <p>逐篇阅读《缠中说禅》，进行结构化理解与复述。</p>
+    </a>
+
+    <a href="/theorems/" class="card">
+      <h3>定理汇总</h3>
+      <p>将缠论中的概念抽象为可验证的逻辑与定理体系。</p>
+    </a>
+
+    <a href="/engine/" class="card">
+      <h3>严格笔引擎</h3>
+      <p>将缠论结构转化为算法，实现严格笔的工程化定义。</p>
+    </a>
+
+    <a href="/notes/" class="card">
+      <h3>杂记</h3>
+      <p>记录研究过程中的思考、问题与阶段性结论。</p>
+    </a>
+
+  </div>
+
+</main>
+{{ end }}
