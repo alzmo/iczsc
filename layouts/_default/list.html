@@ -2,7 +2,7 @@
 <main class="main">
 
   <div class="post-list">
-    {{ range .Pages }}
+    {{ range .Pages.ByTitle.Reverse }}
       {{ $parts := split .Title "｜" }}
       <article class="post-entry">
         <a href="{{ .RelPermalink }}">
