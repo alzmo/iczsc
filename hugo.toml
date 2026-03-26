@@ -9,6 +9,10 @@ publishDir = "docs"
   defaultTheme = "light"
   ShowBreadCrumbs = true
 
+# 🔥 关键：关闭 fingerprint（解决 CSS 被拦）
+[params.assets]
+  disableFingerprinting = true
+
 [menu]
 
   [[menu.main]]
