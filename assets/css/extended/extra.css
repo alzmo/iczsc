@@ -1,3 +1,5 @@
+/* ================= 头部 ================= */
+
 .header {
   padding-top: 24px;
 }
@@ -42,6 +44,8 @@
   width: 100%;
 }
 
+/* ================= 菜单 ================= */
+
 #menu {
   display: flex;
   justify-content: center;
@@ -60,6 +64,8 @@
 #menu li span.active {
   font-weight: 700;
 }
+
+/* ================= 主题切换 ================= */
 
 #theme-toggle {
   background: none;
@@ -85,11 +91,72 @@
   display: none;
 }
 
-/* 首页卡片 */
+/* ================= 最新更新（纵向滚动） ================= */
+
+.home-latest {
+  max-width: 900px;
+  margin: 34px auto 28px auto;
+}
+
+.home-latest h2 {
+  margin: 0 0 14px 0;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.latest-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.latest-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.latest-scroll::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+  border-radius: 999px;
+}
+
+.latest-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.2s ease;
+}
+
+.latest-item:hover {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+}
+
+.latest-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--primary);
+}
+
+.latest-date {
+  font-size: 13px;
+  color: var(--secondary);
+  white-space: nowrap;
+  margin-left: 16px;
+}
+
+/* ================= 首页卡片 ================= */
 
 .iczsc-cards {
   max-width: 900px;
-  margin: 60px auto;
+  margin: 36px auto 60px auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
@@ -122,7 +189,7 @@
   border-color: var(--primary);
 }
 
-/* 列表页 */
+/* ================= 列表页 ================= */
 
 .post-list {
   max-width: 900px;
@@ -132,6 +199,7 @@
 .post-entry {
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
+  transition: all 0.15s ease;
 }
 
 .post-entry h2 {
@@ -153,39 +221,12 @@
   font-size: 14px;
   color: var(--secondary);
 }
-.post-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 6px;
-}
-
-.post-title {
-  font-size: 16px;
-  color: var(--primary);
-}
-
-.post-date {
-  font-size: 13px;
-  color: var(--secondary);
-}
-/* 列表 hover 效果 */
-
-.post-entry {
-  transition: all 0.15s ease;
-}
-
-.post-entry:hover {
-  background: rgba(0, 0, 0, 0.03);
-  border-radius: 8px;
-  padding-left: 6px;
-}
-/* 编号对齐系统 */
 
 .post-line {
   display: grid;
   grid-template-columns: 60px 1fr 120px;
   align-items: center;
+  padding-left: 6px;
 }
 
 .post-index {
@@ -205,7 +246,14 @@
   color: var(--secondary);
   text-align: right;
 }
-/* 底部声明 */
+
+.post-entry:hover {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  padding-left: 6px;
+}
+
+/* ================= 底部 ================= */
 
 .site-disclaimer {
   text-align: center;
@@ -213,20 +261,99 @@
   color: var(--secondary);
   margin-bottom: 8px;
 }
-/* ===== 统一文章页正文字号 ===== */
+
+/* ================= 正文 ================= */
 
 .post-content p {
   font-size: 16px;
   line-height: 1.8;
 }
 
-/* 拙见不要放大 */
 .post-content h2 + p {
   font-size: 16px;
   font-weight: normal;
 }
 
-/* AI解读统一 */
 .post-content blockquote p {
   font-size: 16px;
+}
+
+/* ================= 手机端 ================= */
+
+@media (max-width: 768px) {
+
+  .iczsc-header {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .iczsc-title a {
+    font-size: 18px;
+  }
+
+  .iczsc-subtitle {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  #menu {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  #menu li a {
+    font-size: 15px;
+  }
+
+  .home-latest {
+    max-width: 100%;
+    margin: 24px auto 24px auto;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .home-latest h2 {
+    font-size: 1.7rem;
+  }
+
+  .latest-scroll {
+    max-height: 170px;
+  }
+
+  .latest-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .latest-date {
+    margin-left: 0;
+  }
+
+  .iczsc-cards {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin: 24px auto 40px auto;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .post-list {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .post-line {
+    grid-template-columns: 52px 1fr;
+    gap: 4px 10px;
+  }
+
+  .post-date {
+    grid-column: 2;
+    text-align: left;
+  }
 }
