@@ -6,6 +6,21 @@
     <description>Recent content in 定理汇总 on ICZSC · 缠论工程实验室</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
+    <lastBuildDate>Thu, 02 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://iczsc.com/theorems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>001｜缠中说缠买点定律</title>
+      <link>https://iczsc.com/theorems/001/</link>
+      <pubDate>Thu, 02 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://iczsc.com/theorems/001/</guid>
+      <description>&lt;h2 id=&#34;原文&#34;&gt;原文&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;缠中说缠买点定律：大级别的第二类买点由次一级别相应走势的第一类买点构成。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;缠中说禅短差程序：大级别买点介入的，在次级别第一类卖点出现时，可以先减仓，其后在次级别第一类买点出现时回补。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;</description>
+    </item>
   </channel>
 </rss>
