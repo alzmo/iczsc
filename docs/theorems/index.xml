@@ -6,8 +6,19 @@
     <description>Recent content in 定理汇总 on ICZSC · 缠论工程实验室</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 16 May 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://iczsc.com/theorems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>011｜同级别分解规则</title>
+      <link>https://iczsc.com/theorems/011/</link>
+      <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
+      <guid>https://iczsc.com/theorems/011/</guid>
+      <description>&lt;h2 id=&#34;原文&#34;&gt;原文&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;同级别分解规则：在某级别中，不定义中枢延伸，允许该级别上的盘整+盘整连接；与此同时，规定该级别以下的所有级别，都允许中枢延伸，不允许盘整+盘整连接；至于该级别以上级别，根本不考虑，因为所有走势都按该级别给分解了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;</description>
+    </item>
     <item>
       <title>010｜缠中说禅买卖点级别定理</title>
       <link>https://iczsc.com/theorems/010/</link>
