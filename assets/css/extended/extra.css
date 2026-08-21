@@ -262,59 +262,46 @@
   margin-bottom: 8px;
 }
 
-.iczsc-promotion {
-  width: min(860px, calc(100% - 28px));
-  margin: 0 auto 28px;
-  padding: 20px 22px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 24px;
-  align-items: center;
-  text-align: left;
+.iczsc-promotion-rail {
+  position: fixed;
+  top: 38%;
+  right: 14px;
+  z-index: 90;
+  width: 82px;
+  padding: 10px 8px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-right: 3px solid #b43a32;
+  border-radius: 8px 0 0 8px;
   background: var(--entry);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13);
+  color: var(--primary);
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.iczsc-promotion-copy small,
-.iczsc-promotion-copy strong,
-.iczsc-promotion-copy span {
+.iczsc-promotion-rail small,
+.iczsc-promotion-rail strong {
   display: block;
 }
 
-.iczsc-promotion-copy small {
-  margin-bottom: 5px;
+.iczsc-promotion-rail small {
+  margin-bottom: 2px;
   color: #b43a32;
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
 }
 
-.iczsc-promotion-copy strong {
-  margin-bottom: 5px;
-  color: var(--primary);
-  font-size: 16px;
-}
-
-.iczsc-promotion-copy span {
-  color: var(--secondary);
-  font-size: 12px;
-  line-height: 1.65;
-}
-
-.iczsc-promotion-link {
-  padding: 10px 15px;
-  white-space: nowrap;
-  border: 1px solid var(--primary);
-  border-radius: 7px;
+.iczsc-promotion-rail strong {
   color: var(--primary);
   font-size: 13px;
-  text-decoration: none;
+  line-height: 1.3;
 }
 
-.iczsc-promotion-link:hover {
-  color: var(--theme);
-  background: var(--primary);
+.iczsc-promotion-rail:hover {
+  transform: translateX(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
 }
 
 /* ================= 正文 ================= */
@@ -412,13 +399,18 @@
     text-align: left;
   }
 
-  .iczsc-promotion {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 18px;
+  .iczsc-promotion-rail {
+    top: auto;
+    right: 10px;
+    bottom: 14px;
+    width: auto;
+    padding: 8px 12px;
+    border-right: 1px solid var(--border);
+    border-bottom: 3px solid #b43a32;
+    border-radius: 999px;
   }
 
-  .iczsc-promotion-link {
-    text-align: center;
+  .iczsc-promotion-rail small {
+    display: none;
   }
 }
