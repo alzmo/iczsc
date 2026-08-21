@@ -262,6 +262,61 @@
   margin-bottom: 8px;
 }
 
+.iczsc-promotion {
+  width: min(860px, calc(100% - 28px));
+  margin: 0 auto 28px;
+  padding: 20px 22px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--entry);
+}
+
+.iczsc-promotion-copy small,
+.iczsc-promotion-copy strong,
+.iczsc-promotion-copy span {
+  display: block;
+}
+
+.iczsc-promotion-copy small {
+  margin-bottom: 5px;
+  color: #b43a32;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.iczsc-promotion-copy strong {
+  margin-bottom: 5px;
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.iczsc-promotion-copy span {
+  color: var(--secondary);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.iczsc-promotion-link {
+  padding: 10px 15px;
+  white-space: nowrap;
+  border: 1px solid var(--primary);
+  border-radius: 7px;
+  color: var(--primary);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.iczsc-promotion-link:hover {
+  color: var(--theme);
+  background: var(--primary);
+}
+
 /* ================= 正文 ================= */
 
 .post-content p {
@@ -355,5 +410,15 @@
   .post-date {
     grid-column: 2;
     text-align: left;
+  }
+
+  .iczsc-promotion {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .iczsc-promotion-link {
+    text-align: center;
   }
 }
