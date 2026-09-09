@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-    {{ partial "head.html" . }}
-</head>
-<body>
-
-    {{ partial "header.html" . }}
-
-    <main class="main">
-        {{ block "main" . }}{{ end }}
-    </main>
-
-    {{ partial "footer.html" . }}
-
-</body>
-</html>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ if not .IsHome }}{{ .Title }} · {{ end }}ICZSC · 上证收盘研究</title><meta name="description" content="上证指数收盘复盘：日线、30分钟、5分钟和1分钟结构，中枢区间与下一交易日观察条件。"><link rel="canonical" href="{{ .Permalink }}"><link rel="stylesheet" href="/market.css"></head>
+<body><a class="skip" href="#main">跳至正文</a><header><div class="header-inner"><a class="brand" href="/">ICZSC<span>上证收盘研究</span></a><nav aria-label="主导航"><a href="/">最新收盘</a><a href="/reports/">复盘归档</a></nav><a class="promo" href="https://down.dginv.click/#/register?code=7R92Q79A" target="_blank" rel="sponsored nofollow noopener noreferrer">狗狗加速 ↗<small>站外推广</small></a></div></header><main id="main">{{ block "main" . }}{{ end }}</main><footer><div>ICZSC · 记录结构，跟踪变化</div><p>收盘研究，不是实时行情。结构分类可能随新增数据修订；中枢越界不等于买卖点，新高新低也不自动构成背驰。本网站不提供收益保证，不自动交易。</p><p>数据来源：QMT 本地行情与收盘快照 · 不复权 · 北京时间。推广服务与行情分析相互独立。</p></footer></body></html>
