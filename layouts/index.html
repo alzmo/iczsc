@@ -1,1 +1,4 @@
-{{ define "main" }}{{ $reports := where .Site.RegularPages "Section" "reports" }}{{ with index ($reports.ByDate.Reverse) 0 }}<div class="eyebrow">DAILY CLOSE / 收盘观察</div>{{ partial "report.html" . }}{{ else }}<h1>上证指数收盘研究</h1><p>尚无核验完成的收盘报告。</p>{{ end }}{{ end }}
+{{ define "main" }}
+<section class="book-intro"><p class="eyebrow">ICZSC · 长篇连载</p><h1>晚班地图师</h1><p class="book-note">留一盏灯，读一章故事。</p><p class="schedule">每晚更新 · 北京时间</p>{{ $chapters := (where .Site.RegularPages "Section" "chapters").ByWeight }}{{ if $chapters }}{{ $first := index $chapters 0 }}{{ $last := index $chapters (sub (len $chapters) 1) }}<div class="book-actions"><a class="button" href="{{ $first.RelPermalink }}">从第一章开始</a><a class="text-link" href="{{ $last.RelPermalink }}">阅读最新章 <span aria-hidden="true">→</span></a></div><p class="published">已更新 {{ len $chapters }} 章</p>{{ else }}<p class="waiting">故事即将开始。</p>{{ end }}</section>
+<section class="contents" aria-labelledby="contents-title"><div class="section-heading"><h2 id="contents-title">章节目录</h2><span>按连载顺序</span></div>{{ partial "chapters.html" . }}</section>
+{{ end }}

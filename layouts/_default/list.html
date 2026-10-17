@@ -1,1 +1,1 @@
-{{ define "main" }}<div class="eyebrow">RESEARCH ARCHIVE</div><h1>收盘复盘归档</h1><p class="muted">按交易日保留当时的判断，不用未来结果改写过去。</p><div class="archive">{{ range .Pages.ByDate.Reverse }}<a href="{{ .RelPermalink }}"><time>{{ .Date.Format "2006-01-02" }}</time><strong>{{ .Title }}</strong><span>阅读复盘 →</span></a>{{ end }}</div>{{ end }}
+{{ define "main" }}<section class="contents full-contents"><p class="eyebrow">晚班地图师</p><h1>{{ .Title }}</h1><p class="book-note">{{ .Content }}</p>{{ partial "chapters.html" . }}</section>{{ end }}

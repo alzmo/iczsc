@@ -1,0 +1,1 @@
+<ol class="chapter-list">{{ range (where .Site.RegularPages "Section" "chapters").ByWeight }}<li><a href="{{ .RelPermalink }}"><span>{{ .Title }}</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></a></li>{{ else }}<li class="waiting">暂无已发布章节。</li>{{ end }}</ol>

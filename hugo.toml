@@ -1,7 +1,11 @@
 baseURL = 'https://iczsc.com/'
 languageCode = 'zh-cn'
-title = 'ICZSC · 上证收盘研究'
+title = '晚班地图师 · ICZSC'
 publishDir = 'docs'
+timeZone = 'Asia/Shanghai'
+hasCJKLanguage = true
 disableKinds = ['taxonomy', 'term', 'RSS']
 [permalinks]
-  reports = '/reports/:slug/'
+  chapters = '/chapters/:slug/'
+[markup.goldmark.renderer]
+  unsafe = false
