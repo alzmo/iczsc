@@ -56,7 +56,7 @@ for page in pages:
 assert (OUT/'CNAME').read_text().strip()=='iczsc.com'
 assert (OUT/'.nojekyll').exists()
 assert not (OUT/'reports').exists()
-chapters=list((OUT/'chapters').glob('*/index.html'))
+chapters=sorted((OUT/'chapters').glob('*/index.html'))
 if args.expected_chapters is not None:assert len(chapters)==args.expected_chapters,len(chapters)
 if chapters:
     assert '已是第一章' in chapters[0].read_text()
