@@ -3,7 +3,7 @@ from pathlib import Path
 import shutil
 ROOT=Path(__file__).resolve().parent
 # Explicit list only: never touch Hugo source, tooling, or .git.
-for name in ['index.html','404.html','sitemap.xml','reading.css','reading.js','CNAME','.nojekyll','chapters','reports','market.css']:
+for name in ['index.html','404.html','sitemap.xml','reading.css','reading.js','CNAME','.nojekyll','chapters','tonglu','reports','market.css']:
     target=ROOT/name
     if target.is_dir():shutil.rmtree(target)
     elif target.exists():target.unlink()

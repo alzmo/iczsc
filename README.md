@@ -48,3 +48,24 @@ state; do not force-push or delete repository history.
 
 Keep the original disclosed 狗狗加速 promotion URL and all of
 `target="_blank" rel="sponsored nofollow noopener noreferrer"` intact.
+
+## Independent series: 同路
+
+The legacy book owns only `content/chapters/`, `/chapters/`, and its existing
+home-page chapter list. Its cadence and all existing chapter links stay unchanged.
+Tonglu owns `content/tonglu/chapters/`, `/tonglu/`, and `/tonglu/chapters/`.
+Do not put Tonglu content in the legacy chapter directory. Do not change the
+legacy Hugo `Section == chapters` selector to a global RegularPages collection.
+Tonglu uses its own Hugo type/templates and the separate `build_tonglu.py`
+renderer; both are called by the existing full-site build. No new publication
+schedule is configured. Shared CSS/theme preferences are presentation only.
+
+For each release, fetch fresh main and reconcile concurrent PRs. The original
+backup anchor above is recovery history, not the current publication base.
+Run `python build_static.py`, `python sync_output.py`,
+`python validate.py --expected-chapters 4 --check-mirror`,
+`python test_isolation.py`, and `python release_check.py` (real clock).
+Update the legacy expected count only when that book gains a chapter.
+The release gate covers both books recursively. Publish only reviewed prose;
+never upload planning material or unreleased chapters, even to public branches.
+Verify Pages deployment for the merge SHA and both books on the actual domain.
