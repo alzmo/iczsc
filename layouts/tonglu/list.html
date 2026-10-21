@@ -1,0 +1,6 @@
+{{ define "main" }}
+{{ $chapters := (where .Site.RegularPages "Section" "tonglu").ByWeight }}
+<section class="book-intro"><p class="eyebrow">ICZSC · 独立连载</p><h1>{{ .Title }}</h1><p class="book-note">《同路》专区 · 目录与阅读导航独立。</p>
+{{ if $chapters }}{{ $first := index $chapters 0 }}{{ $last := index $chapters (sub (len $chapters) 1) }}<div class="book-actions"><a class="button" href="{{ $first.RelPermalink }}">从第一章开始</a><a class="text-link" href="{{ $last.RelPermalink }}">阅读最新章 <span aria-hidden="true">→</span></a></div><p class="published">已更新 {{ len $chapters }} 章</p>{{ else }}<p class="waiting">故事即将开始。</p>{{ end }}</section>
+<section class="contents" aria-labelledby="contents-title"><div class="section-heading"><h2 id="contents-title">同路 · 章节目录</h2><a class="text-link" href="/tonglu/">作品首页</a></div><ol class="chapter-list">{{ range $chapters }}<li><a href="{{ .RelPermalink }}"><span>{{ .Title }}</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></a></li>{{ else }}<li class="waiting">暂无已发布章节。</li>{{ end }}</ol></section>
+{{ end }}

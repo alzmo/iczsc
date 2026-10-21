@@ -38,7 +38,7 @@ for page in pages:
     body=page.read_text()
     assert 'localhost' not in body and 'livereload' not in body,page
     assert not re.search(r'[CD]:[\\/]|301123|奕东电子|api[_-]?key|access_token|/workspace/|continuity-private',body),page
-    assert all(s in body for s in ['晚班地图师','站外推广','公开只读','跳至正文','lang="zh-CN"']),page
+    assert all(s in body for s in ['站外推广','公开只读','跳至正文','lang="zh-CN"']),page
     assert not any(s in body for s in ['上证收盘研究','复盘归档','market.css','/reports/']),page
     p=Links();p.feed(body);assert p.promo==1 and p.h1==1,(page,p.promo,p.h1)
     for link in p.links:

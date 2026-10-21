@@ -6,7 +6,7 @@ from pathlib import Path
 from build_static import metadata
 ROOT=Path(__file__).resolve().parent
 now=datetime.now(timezone.utc)
-for path in (ROOT/'content/chapters').glob('*.md'):
+for path in (ROOT/'content').rglob('*.md'):
     if path.name.startswith('_'):continue
     meta,_=metadata(path)
     due=datetime.fromisoformat(meta.get('publishDate',meta['date']))
