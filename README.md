@@ -92,3 +92,9 @@ three books on the live domain.
 The legacy Hugo permalink uses `:filename` to preserve the existing numbered
 `/chapters/001/` URLs when a chapter does not declare a slug. This is a routing
 compatibility fix, not a rewrite of any existing prose.
+
+Dudong catalogs group only already-published chapters by volume. The original
+first 40 chapters default to 第一卷 · 云州雪夜. Every later chapter must declare
+its editorially confirmed `volume` number and `volumeTitle`. Never put an
+unpublished volume or future chapter range into public catalog metadata.
+Chapter URLs stay numbered and previous/next navigation continues across volumes.

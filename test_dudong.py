@@ -44,3 +44,19 @@ try:
 finally:
     fixture.unlink(missing_ok=True)
 print('PASS: three-book prose, contiguous numbering, exact adjacent navigation, counts, isolation and release gate')
+
+# Only published volume labels appear, with each chapter in its stated volume.
+expected_groups=[]
+for src in sorted((ROOT/'content/dudong/chapters').glob('[0-9]*.md')):
+    meta,_=metadata(src)
+    volume=int(meta.get('volume','1'))
+    title=meta.get('volumeTitle','第一卷 · 云州雪夜')
+    if not expected_groups or expected_groups[-1] != (volume,title):
+        expected_groups.append((volume,title))
+    output=(ROOT/'docs/dudong/chapters'/meta.get('slug',src.stem)/'index.html').read_text()
+    assert '<p class="eyebrow">'+title+'</p>' in output
+for rel in ['dudong/index.html','dudong/chapters/index.html']:
+    output=(ROOT/'docs'/rel).read_text()
+    actual=re.findall(r'<h3 class="volume-heading" id="volume-(\d+)">(.*?)</h3>',output)
+    assert [(int(n),title) for n,title in actual]==expected_groups
+print('PASS: published-volume grouping and chapter volume labels')
