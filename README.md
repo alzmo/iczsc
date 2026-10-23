@@ -69,3 +69,26 @@ Update the legacy expected count only when that book gains a chapter.
 The release gate covers both books recursively. Publish only reviewed prose;
 never upload planning material or unreleased chapters, even to public branches.
 Verify Pages deployment for the merge SHA and both books on the actual domain.
+
+## Independent series: 渡冬
+
+Dudong owns only `content/dudong/chapters/`, `/dudong/`, and
+`/dudong/chapters/`, with its own Hugo type/templates and `build_dudong.py`.
+The home page links all three books separately. Both existing books retain their
+source directories, chapter numbering, navigation, and publication cadence.
+Only editorially reviewed final chapters may enter this public repository.
+Manuscripts, future outlines, editorial notes, and backups remain private.
+No new automatic publication schedule is configured for Dudong.
+
+For a full release, run the build and mirror commands above,
+`python validate.py --expected-chapters 6 --check-mirror`,
+`python test_isolation.py`, `python test_dudong.py`, and
+`python release_check.py`. The expected chapter count in validate.py concerns
+only the legacy book; update it only when that book gains a chapter.
+Recheck fresh main and open PRs before publication; reconcile changes rather
+than overwriting them. Verify the exact merge commit's Pages result and all
+three books on the live domain.
+
+The legacy Hugo permalink uses `:filename` to preserve the existing numbered
+`/chapters/001/` URLs when a chapter does not declare a slug. This is a routing
+compatibility fix, not a rewrite of any existing prose.

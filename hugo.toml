@@ -6,6 +6,6 @@ timeZone = 'Asia/Shanghai'
 hasCJKLanguage = true
 disableKinds = ['taxonomy', 'term', 'RSS']
 [permalinks]
-  chapters = '/chapters/:slug/'
+  chapters = '/chapters/:filename/'
 [markup.goldmark.renderer]
   unsafe = false

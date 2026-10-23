@@ -1,0 +1,46 @@
+"""Three-book publication regression checks. Private fixtures are always removed."""
+import re
+import subprocess
+import tempfile
+from datetime import datetime, timezone
+from pathlib import Path
+from build_static import ROOT, metadata, paragraphs
+from build_dudong import build_dudong
+
+books = [('chapters', '晚班地图师'), ('tonglu/chapters', '同路'), ('dudong/chapters', '渡冬')]
+for folder, title in books:
+    sources = sorted((ROOT/'content'/folder).glob('[0-9]*.md'))
+    assert sources, f'No final chapters: {title}'
+    assert [int(metadata(p)[0]['weight']) for p in sources] == list(range(1,len(sources)+1))
+    urls = ['/'+folder+'/'+metadata(p)[0].get('slug',p.stem)+'/' for p in sources]
+    index=(ROOT/'docs'/folder/'index.html').read_text()
+    assert len(re.findall('<li>',index)) == len(sources)
+    for i,src in enumerate(sources):
+        meta,body=metadata(src)
+        output=(ROOT/'docs'/folder/meta.get('slug',src.stem)/'index.html').read_text()
+        assert '<div class="prose">'+paragraphs(body)+'</div>' in output, src
+        assert f'{title} · 章节目录' in output
+        nav=re.search(r'<nav class="chapter-nav".*?</nav>',output).group()
+        expected=([urls[i-1]] if i else [])+['/'+folder+'/']+([urls[i+1]] if i+1<len(urls) else [])
+        assert re.findall(r'href="([^"]+)"',nav)==expected,(src,nav)
+        assert ('rel="prev"' in nav)==(i>0)
+        assert ('rel="next"' in nav)==(i+1<len(urls))
+    home=(ROOT/'docs'/('index.html' if folder=='chapters' else folder.split('/')[0]+'/index.html')).read_text()
+    assert f'已更新 {len(sources)} 章' in home
+home=(ROOT/'docs/index.html').read_text()
+assert all(x in home for x in ['晚班地图师','href="/tonglu/"','《同路》','href="/dudong/"','《渡冬》'])
+count=len(list((ROOT/'content/dudong/chapters').glob('[0-9]*.md')))
+fixture=ROOT/'content/dudong/chapters/isolation-fixture.md'
+assert not fixture.exists()
+try:
+    for flags in ['publishDate: 2999-01-01T00:00:00+08:00\ndraft: false','publishDate: 2000-01-01T00:00:00+08:00\ndraft: true']:
+        fixture.write_text('---\ntitle: "ISOLATION_FIXTURE"\ndate: 2000-01-01T00:00:00+08:00\nweight: 999\nslug: isolation-fixture\n'+flags+'\n---\nThis is a test fixture.\n')
+        with tempfile.TemporaryDirectory() as d:
+            urls=build_dudong(Path(d),datetime.now(timezone.utc))
+            assert not any('fixture' in u for u in urls)
+            assert len(urls)==count+2
+        gate=subprocess.run(['python','release_check.py'],cwd=ROOT,capture_output=True)
+        assert gate.returncode != 0
+finally:
+    fixture.unlink(missing_ok=True)
+print('PASS: three-book prose, contiguous numbering, exact adjacent navigation, counts, isolation and release gate')
