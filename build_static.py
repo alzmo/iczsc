@@ -75,7 +75,7 @@ def main():
     intro='<section class="book-intro"><p class="eyebrow">ICZSC · 长篇连载</p><h1>晚班地图师</h1><p class="book-note">留一盏灯，读一章故事。</p><p class="schedule">每晚更新 · 北京时间</p>'
     intro+=('<div class="book-actions"><a class="button" href="'+chapters[0]['url']+'">从第一章开始</a><a class="text-link" href="'+chapters[-1]['url']+'">阅读最新章 <span aria-hidden="true">→</span></a></div><p class="published">已更新 '+str(len(chapters))+' 章</p>') if chapters else '<p class="waiting">故事即将开始。</p>'
     intro+='</section><section class="contents" aria-labelledby="contents-title"><div class="section-heading"><h2 id="contents-title">章节目录</h2><span>按连载顺序</span></div>'+listing+'</section>'
-    intro+='<section class="contents" aria-labelledby="other-books"><div class="section-heading"><h2 id="other-books">本站其他作品</h2></div><p><a class="text-link" href="/tonglu/">《同路》 · 进入独立专区 →</a></p></section>'
+    intro+='<section class="contents" aria-labelledby="other-books"><div class="section-heading"><h2 id="other-books">本站其他作品</h2></div><p><a class="text-link" href="/tonglu/">《同路》 · 进入独立专区 →</a></p><p><a class="text-link" href="/dudong/">《渡冬》 · 进入独立专区 →</a></p></section>'
     write('index.html', render('', '/', intro,True))
     write('chapters/index.html', render('章节目录','/chapters/','<section class="contents full-contents"><p class="eyebrow">晚班地图师</p><h1>章节目录</h1><p class="book-note">每晚一章，慢慢读。</p>'+listing+'</section>'))
     for i,c in enumerate(chapters):
@@ -90,7 +90,9 @@ def main():
     write('404.html',render('这一页不在这里','/404.html','<section class="not-found"><p class="eyebrow">404</p><h1>这一页不在这里</h1><p>旧页面已收起，故事从首页开始。</p><a class="button" href="/">返回首页</a></section>'))
     from build_tonglu import build_tonglu
     tonglu_urls=build_tonglu(out,now)
-    urls=['/','/chapters/']+[c['url'] for c in chapters]+tonglu_urls
+    from build_dudong import build_dudong
+    dudong_urls=build_dudong(out,now)
+    urls=['/','/chapters/']+[c['url'] for c in chapters]+tonglu_urls+dudong_urls
     write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>https://iczsc.com'+u+'</loc></url>' for u in urls)+'</urlset>\n')
     print(f'Limited Python render: {len(chapters)} released chapters; output {out.name}; cutoff {now.isoformat()}')
 
