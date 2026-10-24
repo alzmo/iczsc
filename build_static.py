@@ -76,6 +76,8 @@ def main():
     intro+=('<div class="book-actions"><a class="button" href="'+chapters[0]['url']+'">从第一章开始</a><a class="text-link" href="'+chapters[-1]['url']+'">阅读最新章 <span aria-hidden="true">→</span></a></div><p class="published">已更新 '+str(len(chapters))+' 章</p>') if chapters else '<p class="waiting">故事即将开始。</p>'
     intro+='</section><section class="contents" aria-labelledby="contents-title"><div class="section-heading"><h2 id="contents-title">章节目录</h2><span>按连载顺序</span></div>'+listing+'</section>'
     intro+='<section class="contents" aria-labelledby="other-books"><div class="section-heading"><h2 id="other-books">本站其他作品</h2></div><p><a class="text-link" href="/tonglu/">《同路》 · 进入独立专区 →</a></p><p><a class="text-link" href="/dudong/">《渡冬》 · 进入独立专区 →</a></p></section>'
+    if metadata(ROOT/'content/dudong/_index.md')[0].get('completed', 'false').lower() == 'true':
+        intro = intro.replace('《渡冬》 · 进入独立专区', '《渡冬》 · 全书完结 · 进入独立专区')
     write('index.html', render('', '/', intro,True))
     write('chapters/index.html', render('章节目录','/chapters/','<section class="contents full-contents"><p class="eyebrow">晚班地图师</p><h1>章节目录</h1><p class="book-note">每晚一章，慢慢读。</p>'+listing+'</section>'))
     for i,c in enumerate(chapters):

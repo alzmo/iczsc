@@ -26,7 +26,11 @@ for folder, title in books:
         assert ('rel="prev"' in nav)==(i>0)
         assert ('rel="next"' in nav)==(i+1<len(urls))
     home=(ROOT/'docs'/('index.html' if folder=='chapters' else folder.split('/')[0]+'/index.html')).read_text()
-    assert f'已更新 {len(sources)} 章' in home
+    completed = folder == 'dudong/chapters' and metadata(ROOT/'content/dudong/_index.md')[0].get('completed','false').lower() == 'true'
+    assert (f'全书完结 · 共 {len(sources)} 章' if completed else f'已更新 {len(sources)} 章') in home
+    if completed:
+        assert len(sources) == 400
+        assert '<span>全书完结</span>' in nav and '待续' not in nav
 home=(ROOT/'docs/index.html').read_text()
 assert all(x in home for x in ['晚班地图师','href="/tonglu/"','《同路》','href="/dudong/"','《渡冬》'])
 count=len(list((ROOT/'content/dudong/chapters').glob('[0-9]*.md')))
