@@ -6,6 +6,7 @@ from build_static import ROOT, metadata, paragraphs, render
 
 
 def build_dudong(out, now):
+    completed = metadata(ROOT/"content/dudong/_index.md")[0].get("completed", "false").lower() == "true"
     chapters = []
     for source in (ROOT/'content/dudong/chapters').glob('*.md'):
         if source.name.startswith('_'):
@@ -25,6 +26,9 @@ def build_dudong(out, now):
     chapters.sort(key=lambda c: c['weight'])
     assert len({c['weight'] for c in chapters}) == len(chapters)
     assert len({c['url'] for c in chapters}) == len(chapters)
+
+    if completed:
+        assert [c["weight"] for c in chapters] == list(range(1,401)), "Completed Dudong requires all 400 published chapters"
 
     def write(url, title, body):
         target = out/url.strip('/')/'index.html'
@@ -47,6 +51,8 @@ def build_dudong(out, now):
     for url, title in [('/dudong/', '渡冬'), ('/dudong/chapters/', '章节目录')]:
         body = '<section class="book-intro"><p class="eyebrow">ICZSC · 独立连载</p><h1>'+title+'</h1><p class="book-note">按卷分组 · 按章节顺序阅读</p>'
         body += ('<div class="book-actions"><a class="button" href="'+chapters[0]['url']+'">从第一章开始</a><a class="text-link" href="'+chapters[-1]['url']+'">阅读最新章 <span aria-hidden="true">→</span></a></div><p class="published">已更新 '+str(len(chapters))+' 章</p>') if chapters else '<p class="waiting">故事即将开始。</p>'
+        if completed:
+            body = body.replace('已更新 '+str(len(chapters))+' 章', '全书完结 · 共 '+str(len(chapters))+' 章')
         body += '</section><section class="contents" aria-labelledby="contents-title"><div class="section-heading"><h2 id="contents-title">渡冬 · 章节目录</h2><a class="text-link" href="/dudong/">作品首页</a></div>'+listing+'</section>'
         write(url, title, body)
     for i, c in enumerate(chapters):
@@ -54,7 +60,7 @@ def build_dudong(out, now):
         body = '<article class="chapter"><header class="chapter-header"><a class="eyebrow" href="/dudong/chapters/">渡冬 · 章节目录</a><p class="eyebrow">'+html.escape(c['volume_title'])+'</p><h1>'+html.escape(c['title'])+'</h1><p class="chapter-meta"><time datetime="'+c['date'].isoformat()+'">'+c['date'].strftime('%Y年%m月%d日')+'</time><span>约 '+str(minutes)+' 分钟</span></p></header><div class="prose">'+paragraphs(c['body'])+'</div><nav class="chapter-nav" aria-label="章节翻页">'
         body += '<a href="'+chapters[i-1]['url']+'" rel="prev">← 上一章</a>' if i else '<span>已是第一章</span>'
         body += '<a href="/dudong/chapters/">目录</a>'
-        body += '<a href="'+chapters[i+1]['url']+'" rel="next">下一章 →</a>' if i+1 < len(chapters) else '<span>待续</span>'
+        body += '<a href="'+chapters[i+1]['url']+'" rel="next">下一章 →</a>' if i+1 < len(chapters) else ('<span>全书完结</span>' if completed else '<span>待续</span>')
         body += '</nav><a class="back-top" href="#main">回到页首 ↑</a></article>'
         write(c['url'], c['title'], body)
     print(f'Dudong: {len(chapters)} independently released chapters')
