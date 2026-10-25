@@ -63,7 +63,7 @@ schedule is configured. Shared CSS/theme preferences are presentation only.
 For each release, fetch fresh main and reconcile concurrent PRs. The original
 backup anchor above is recovery history, not the current publication base.
 Run `python build_static.py`, `python sync_output.py`,
-`python validate.py --expected-chapters 8 --check-mirror`,
+`python validate.py --expected-chapters 9 --check-mirror`,
 `python test_isolation.py`, and `python release_check.py` (real clock).
 Update the legacy expected count only when that book gains a chapter.
 The release gate covers both books recursively. Publish only reviewed prose;
@@ -81,7 +81,7 @@ Manuscripts, future outlines, editorial notes, and backups remain private.
 No new automatic publication schedule is configured for Dudong.
 
 For a full release, run the build and mirror commands above,
-`python validate.py --expected-chapters 8 --check-mirror`,
+`python validate.py --expected-chapters 9 --check-mirror`,
 `python test_isolation.py`, `python test_dudong.py`, and
 `python release_check.py`. The expected chapter count in validate.py concerns
 only the legacy book; update it only when that book gains a chapter.
