@@ -74,7 +74,7 @@ Verify Pages deployment for the merge SHA and both books on the actual domain.
 
 Dudong owns only `content/dudong/chapters/`, `/dudong/`, and
 `/dudong/chapters/`, with its own Hugo type/templates and `build_dudong.py`.
-The home page links all three books separately. Both existing books retain their
+Dudong is hidden from the public website at the owner’s request (2026-11-02 Beijing). Both existing books retain their
 source directories, chapter numbering, navigation, and publication cadence.
 Only editorially reviewed final chapters may enter this public repository.
 Manuscripts, future outlines, editorial notes, and backups remain private.
@@ -87,7 +87,7 @@ For a full release, run the build and mirror commands above,
 only the legacy book; update it only when that book gains a chapter.
 Recheck fresh main and open PRs before publication; reconcile changes rather
 than overwriting them. Verify the exact merge commit's Pages result and all
-three books on the live domain.
+two visible books and confirm former Dudong URLs return 404 on the live domain.
 
 The legacy Hugo permalink uses `:filename` to preserve the existing numbered
 `/chapters/001/` URLs when a chapter does not declare a slug. This is a routing
@@ -98,3 +98,20 @@ first 40 chapters default to 第一卷 · 云州雪夜. Every later chapter must
 its editorially confirmed `volume` number and `volumeTitle`. Never put an
 unpublished volume or future chapter range into public catalog metadata.
 Chapter URLs stay numbered and previous/next navigation continues across volumes.
+
+## Dudong website visibility (owner request, 2026-11-02)
+
+`content/dudong/_index.md` has `draft: true`: this is the website visibility
+flag read by the Python renderer. Its Hugo cascade also marks descendants draft
+and sets `_build.render/list: never` for the entire section. Do not remove these
+settings during daily releases. The home template only links a non-draft section.
+The full builder and direct Dudong builder remove stale Dudong output; always run
+`sync_output.py` to remove the old root mirror, then `python test_dudong.py`.
+There must be no Dudong directory, chapter HTML, sitemap entry or public link.
+The 400 numbered final sources remain unchanged and recoverable in this PUBLIC
+repository: this is website withdrawal, not GitHub-source secrecy or history erasure.
+A verified private ZIP with a SHA-256 / Git-blob manifest was retained before removal
+(base commit `522d9c7caa296ec4f8022f51098356ed18ed83f8`, 1211 recovery files).
+Restoration requires an explicit new owner request: remove the section draft and
+Hugo cascade/_build exclusions together, build, test, and publish a new reviewed PR.
+Never rewrite Git history, change repository visibility or deployment settings.

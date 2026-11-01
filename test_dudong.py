@@ -7,6 +7,35 @@ from pathlib import Path
 from build_static import ROOT, metadata, paragraphs
 from build_dudong import build_dudong
 
+# Hidden-site regression: retain all sources, but never publish or index any of them.
+if metadata(ROOT/'content/dudong/_index.md')[0].get('draft', 'false').lower() == 'true':
+    import sys
+    sources = sorted((ROOT/'content/dudong/chapters').glob('[0-9]*.md'))
+    assert len(sources) == 400
+    assert [int(metadata(p)[0]['weight']) for p in sources] == list(range(1,401))
+    for base in [ROOT/'docs', ROOT]:
+        assert not (base/'dudong').exists(), 'Hidden book output survived'
+        for src in sources:
+            slug = metadata(src)[0].get('slug', src.stem)
+            assert not (base/'dudong/chapters'/slug/'index.html').exists()
+    for output in (ROOT/'docs').rglob('*'):
+        if output.is_file() and output.suffix in ['.html', '.xml', '.json', '.js']:
+            text = output.read_text()
+            assert '/dudong/' not in text and '渡冬' not in text, output
+    section = (ROOT/'content/dudong/_index.md').read_text()
+    assert 'cascade:' in section and '  build:' in section and '    render: never' in section
+    # Even a direct component build must remove stale output, rather than leave it readable.
+    with tempfile.TemporaryDirectory() as d:
+        out = Path(d)
+        stale = out/'dudong/chapters/001/index.html'
+        stale.parent.mkdir(parents=True)
+        stale.write_text('stale prose')
+        assert build_dudong(out, datetime.now(timezone.utc)) == []
+        assert not (out/'dudong').exists()
+    subprocess.run([sys.executable, 'test_isolation.py'], cwd=ROOT, check=True)
+    print('PASS: 400 recoverable sources; all 400 old chapter outputs and catalogs absent in both trees; no public entry/index; direct build cleans stale prose')
+    sys.exit(0)
+
 books = [('chapters', '晚班地图师'), ('tonglu/chapters', '同路'), ('dudong/chapters', '渡冬')]
 for folder, title in books:
     sources = sorted((ROOT/'content'/folder).glob('[0-9]*.md'))
