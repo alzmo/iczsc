@@ -1,11 +1,16 @@
 """Independent Dudong output. Never joins the legacy /chapters/ collection."""
 import html
 import re
+import shutil
 from datetime import datetime
 from build_static import ROOT, metadata, paragraphs, render
 
 
 def build_dudong(out, now):
+    # The section draft flag is also the website visibility flag. Source stays recoverable.
+    if metadata(ROOT/"content/dudong/_index.md")[0].get("draft", "false").lower() == "true":
+        shutil.rmtree(out/'dudong', ignore_errors=True)
+        return []
     completed = metadata(ROOT/"content/dudong/_index.md")[0].get("completed", "false").lower() == "true"
     chapters = []
     for source in (ROOT/'content/dudong/chapters').glob('*.md'):
